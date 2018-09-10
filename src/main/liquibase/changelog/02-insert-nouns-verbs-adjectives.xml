@@ -28,4 +28,10 @@
     <insert tableName="verbs">
         <column name="word" value="Ugly"/>
     </insert>
+
+    <rollback>
+        delete from nouns where word in ("Developer", "Project Manager", "Tester");
+        delete from verbs where word in ("loves", "hates", "enjoys");
+        delete from adjectives where word in ("Beautiful", "Ugly");
+    </rollback>
 </changeSet>

@@ -17,16 +17,49 @@
             ${basedir}/src/main/liquibase/liquibase-changelog.xml
           </changeLogFile>
           <driver>org.postgresql.Driver</driver>
-          <url>jdbc:postgresql://${DB_URL}:${DB_PORT}/${DB_SCHEMA}</url>
-          <username>${DB_LOGIN}</username>
-          <password>${DB_PASSWORD}</password>
+          <url>${env.PG_SQL_JDBC_URL}</url>
+          <username>${env.PG_SQL_CREDS_USR}</username>
+          <password>${env.PG_SQL_CREDS_PSW}</password>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <delimiters>
+            <delimiter>{{*}}</delimiter>
+          </delimiters>
+        </configuration>
+        <executions>
+          <execution>
+            <id>copy-version-file</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/src</directory>
+                  <!-- filtering to replace {{version}} by the project version -->
+                  <includes>
+                    <include>VERSION</include>
+                  </includes>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
 
   <properties>
     <postgres.version>42.1.4</postgres.version>
+    <liquibase.promptOnNonLocalDatabase>false</liquibase.promptOnNonLocalDatabase>
   </properties>
 
   <dependencies>
