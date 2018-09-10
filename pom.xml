@@ -14,14 +14,26 @@
         <artifactId>liquibase-maven-plugin</artifactId>
         <configuration>
           <changeLogFile>
-            ${basedir}/src/main/liquibase/master.xml
+            ${basedir}/src/main/liquibase/liquibase-changelog.xml
           </changeLogFile>
-          <driver>com.mysql.jdbc.Driver</driver>
-          <url>jdbc:mysql://${mysql.host}:${mysql.port}/${mysql.db}</url>
-          <username>${mysql.login}</username>
-          <password>${mysql.password}</password>
+          <driver>org.postgresql.Driver</driver>
+          <url>jdbc:postgresql://${DB_URL}:${DB_PORT}/${DB_SCHEMA}</url>
+          <username>${DB_LOGIN}</username>
+          <password>${DB_PASSWORD}</password>
         </configuration>
       </plugin>
     </plugins>
   </build>
+
+  <properties>
+    <postgres.version>42.1.4</postgres.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${postgres.version}</version>
+    </dependency>
+  </dependencies>
 </project>
