@@ -1,0 +1,20 @@
+
+<changeSet id="01" author="jpbriend">
+    <createTable tableName="nouns">
+        <column name="word" type="varchar(255)">
+            <constraints nullable="false" unique="true" />
+        </column>
+    </createTable>
+
+    <createTable tableName="verbs">
+        <column name="word" type="varchar(255)">
+            <constraints nullable="false" unique="true" />
+        </column>
+    </createTable>
+
+    <createTable tableName="adjectives">
+        <column name="word" type="varchar(255)">
+            <constraints nullable="false" unique="true" />
+        </column>
+    </createTable>
+</changeSet>

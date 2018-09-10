@@ -1,0 +1,31 @@
+<changeSet id="02" author="jpbriend">
+    <!-- Nouns data -->
+    <insert tableName="nouns">
+        <column name="word" value="Developer"/>
+    </insert>
+    <insert tableName="nouns">
+        <column name="word" value="Project Manager"/>
+    </insert>
+    <insert tableName="nouns">
+        <column name="word" value="Tester"/>
+    </insert>
+
+    <!-- Verbs data -->
+    <insert tableName="verbs">
+        <column name="word" value="loves"/>
+    </insert>
+    <insert tableName="verbs">
+        <column name="word" value="hates"/>
+    </insert>
+    <insert tableName="nouns">
+        <column name="word" value="enjoys"/>
+    </insert>
+
+    <!-- Adjectives data -->
+    <insert tableName="adjectives">
+        <column name="word" value="Beautiful"/>
+    </insert>
+    <insert tableName="verbs">
+        <column name="word" value="Ugly"/>
+    </insert>
+</changeSet>
