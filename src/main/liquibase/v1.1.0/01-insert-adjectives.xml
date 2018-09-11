@@ -1,0 +1,14 @@
+<changeSet id="01" author="jpbriend">
+
+    <!-- Adjectives data -->
+    <insert tableName="adjectives">
+        <column name="word" value="Smart"/>
+    </insert>
+    <insert tableName="verbs">
+        <column name="word" value="Lazy"/>
+    </insert>
+
+    <rollback>
+        delete from adjectives where word in ("Smart", "Lazy");
+    </rollback>
+</changeSet>
