@@ -23,12 +23,12 @@ pipeline {
             environment {
                 PG_SQL_CREDS = credentials('postgresql.preview')
                 PG_SQL_JDBC_URL = 'jdbc:postgresql://wordsmith-preview.ca3tifbqfpuf.us-east-1.rds.amazonaws.com:5432/wordsmith'
-                MAVEN_OPTS = "--batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
             }
             steps {
                 container('jdk') {
                     script {
-                    liquibaseChangeLogs = ["v1.0.0", "v1.1.0"]
+                        MAVEN_OPTS = "--batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
+                        liquibaseChangeLogs = ["v1.0.0", "v1.1.0"]
                         for (liquibaseChangeLog in liquibaseChangeLogs) {
                             changeLogFile = "src/main/liquibase/changelog-${liquibaseChangeLog}.xml"
                             sh """
