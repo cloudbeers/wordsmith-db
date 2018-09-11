@@ -8,11 +8,11 @@
             <column name="word" value="Lazy"/>
         </insert>
         <delete tableName="verbs">
-            <column name="word" value="Lazy"/>
+        	<where>word = "Lazy"</where>
         </delete>
 
         <rollback>
-            delete from adjectives where word in ("Lazy");
+            delete from adjectives where word = "Lazy";
             insert into verbs(word) values ("Lazy");
         </rollback>
     </changeSet>
