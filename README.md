@@ -8,6 +8,6 @@
    ## Update database
    Use Maven:
    ```
-   mvn liquibase:update -Dliquibase.changeLogFile=src/main/resources/liquibase/changelog-v2.0.0.xml
+   mvn liquibase:update -Dliquibase.changeLogFile=src/main/liquibase/changelog-v2.0.0.xml
    ```
    
