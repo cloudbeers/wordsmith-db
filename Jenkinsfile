@@ -47,9 +47,9 @@ pipeline {
                           # Create a tag in order to rollback if needed
                           ./mvnw $MAVEN_OPTS liquibase:tag -Dliquibase.tag=${DB_TAG_VERSION}
 
-                          cat src/main/liquibase/changelog-* > /target/liquibaseConcatenatedChangeLogs.txt
+                          cat src/main/liquibase/changelog-* > target/liquibaseConcatenatedChangeLogs.txt
                         """
-                        archiveArtifacts artifacts: "/target/liquibaseConcatenatedChangeLogs.txt", fingerprint: true
+                        archiveArtifacts artifacts: "target/liquibaseConcatenatedChangeLogs.txt", fingerprint: true
                     }
                 }
             }
