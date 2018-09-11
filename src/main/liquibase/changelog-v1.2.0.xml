@@ -7,9 +7,18 @@
         <insert tableName="adjectives">
             <column name="word" value="Lazy"/>
         </insert>
+        <insert tableName="adjectives">
+            <column name="word" value="Ugly"/>
+        </insert>
         <delete tableName="verbs">
-        	<where>word = "Lazy"</where>
+            <where>word = 'Lazy'</where>
         </delete>
+        <delete tableName="verbs">
+            <where>word = 'Ugly'</where>
+        </delete>
+        <insert tableName="verbs">
+            <column name="word" value="enjoys"/>
+        </insert>
 
         <rollback>
             delete from adjectives where word = "Lazy";
