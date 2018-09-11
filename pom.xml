@@ -13,9 +13,6 @@
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-maven-plugin</artifactId>
         <configuration>
-          <changeLogFile>
-            ${basedir}/src/main/liquibase/liquibase-changelog.xml
-          </changeLogFile>
           <driver>org.postgresql.Driver</driver>
           <url>${env.PG_SQL_JDBC_URL}</url>
           <username>${env.PG_SQL_CREDS_USR}</username>

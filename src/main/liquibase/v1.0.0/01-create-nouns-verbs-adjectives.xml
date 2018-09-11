@@ -1,4 +1,3 @@
-
 <changeSet id="01" author="jpbriend">
     <createTable tableName="nouns">
         <column name="word" type="varchar(255)">
