@@ -1,8 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="01" author="jpbriend">
+        <createTable tableName="nouns">
+            <column name="word" type="varchar(255)">
+                <constraints nullable="false" unique="true" />
+            </column>
+        </createTable>
 
-    <include file="v1.0.0/01-create-nouns-verbs-adjectives.xml" relativeToChangelogFile="true"/>
+        <createTable tableName="verbs">
+            <column name="word" type="varchar(255)">
+                <constraints nullable="false" unique="true" />
+            </column>
+        </createTable>
 
-    <include file="v1.0.0/02-insert-nouns-verbs-adjectives.xml" relativeToChangelogFile="true"/>
+        <createTable tableName="adjectives">
+            <column name="word" type="varchar(255)">
+                <constraints nullable="false" unique="true" />
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="nouns"/>
+            <dropTable tableName="verbs"/>
+            <dropTable tableName="adjectives"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="02" author="jpbriend">
+        <!-- Nouns data -->
+        <insert tableName="nouns">
+            <column name="word" value="Developer"/>
+        </insert>
+        <insert tableName="nouns">
+            <column name="word" value="Project Manager"/>
+        </insert>
+        <insert tableName="nouns">
+            <column name="word" value="Tester"/>
+        </insert>
+
+        <!-- Verbs data -->
+        <insert tableName="verbs">
+            <column name="word" value="loves"/>
+        </insert>
+        <insert tableName="verbs">
+            <column name="word" value="hates"/>
+        </insert>
+        <insert tableName="nouns">
+            <column name="word" value="enjoys"/>
+        </insert>
+
+        <!-- Adjectives data -->
+        <insert tableName="adjectives">
+            <column name="word" value="Beautiful"/>
+        </insert>
+        <insert tableName="verbs">
+            <column name="word" value="Ugly"/>
+        </insert>
+
+        <rollback>
+            delete from nouns where word in ("Developer", "Project Manager", "Tester");
+            delete from verbs where word in ("loves", "hates", "enjoys");
+            delete from adjectives where word in ("Beautiful", "Ugly");
+        </rollback>
+    </changeSet>
 
 </databaseChangeLog>

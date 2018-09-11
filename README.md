@@ -2,8 +2,7 @@
    
    ## Create a new version
    Create a new Changelog file (located in _src/main/liquibase_) (ex: _src/main/liquibase/changelog-v1.0.0.xml_).
-   Create a directory for the new  version : _src/main/liquibase/v2.0.0_.
-   Add new Changesets in this directory and reference them in the Changelog.
+   Add new Changesets in the Changelog file (no sub files as changelog will be fingerprinted and archived by Jenkins).
    
    ## Update database
    Use Maven:
