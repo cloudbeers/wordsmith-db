@@ -28,7 +28,7 @@ pipeline {
                 container('jdk') {
                     script {
                         MAVEN_OPTS = "--batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
-                        liquibaseChangeLogs = ["v1.0.0", "v1.1.0"]
+                        liquibaseChangeLogs = ["v1.0.0", "v1.1.0", "v1.2.0"]
 
                         sh "./mvnw $MAVEN_OPTS validate"
 
