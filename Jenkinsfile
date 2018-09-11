@@ -23,22 +23,27 @@ pipeline {
             environment {
                 PG_SQL_CREDS = credentials('postgresql.preview')
                 PG_SQL_JDBC_URL = 'jdbc:postgresql://wordsmith-preview.ca3tifbqfpuf.us-east-1.rds.amazonaws.com:5432/wordsmith'
+                MAVEN_OPTS = "--batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
             }
             steps {
                 container('jdk') {
                     script {
-                        APPLICATION_VERSION = readFile("target/VERSION")
-                    }
-                    withMaven(mavenOpts: '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn') {
+                    liquibaseChangeLogs = ["v1.0.0", "v1.1.0"]
+                        for (liquibaseChangeLog in liquibaseChangeLogs) {
+                            changeLogFile = "src/main/liquibase/changelog-${liquibaseChangeLog}.xml"
+                            sh """
+                               # Display all changes which will be applied by the Update command
+                               ./mvnw $MAVEN_OPTS liquibase:status -Dliquibase.changeLogFile=${changeLogFile}
+                               
+                               # Update the database
+                               ./mvnw $MAVEN_OPTS liquibase:update -Dliquibase.changeLogFile=${changeLogFile}
+                            """
+                            archiveArtifacts artifacts: changeLogFile, fingerprint: true
+                        } // for
+                        DB_TAG_VERSION = readFile("target/VERSION")
                         sh """
-                            # Display all changes which will be applied by the Update command
-                            ./mvnw liquibase:status
-                            
-                            # Update the database
-                            ./mvnw liquibase:update
-                            
-                            # Create a tag in order to rollback if needed
-                            ./mvnw liquibase tag:${APPLICATION_VERSION}
+                          # Create a tag in order to rollback if needed
+                          ./mvnw $MAVEN_OPTS liquibase:tag -Dliquibase.tag=${DB_TAG_VERSION}
                         """
                     }
                 }
