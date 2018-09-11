@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # set -x
 
-export JIRA_PROJECT_KEY="WOR"
+export JIRA_PROJECT_KEY="DB"
 export CHANGELOG_FILE="CHANGELOG"
 
 # https://developer.atlassian.com/jiradev/jira-apis/jira-rest-apis/jira-rest-api-tutorials/jira-rest-api-example-create-issue
